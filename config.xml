@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.simplestqr862049" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="ru.animatika.simplestqr" version="0.2.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>SimplestQR</name>
   <description>
-        An Ionic Framework and Cordova project.
-    </description>
-  <author email="you@example.com" href="http://example.com.com/">
-      Your Name Here
-    </author>
+        Just to read URL from QR-code and open system browser with this link. Nothing more!
+  </description>
+  <author email="info@animatika.ru" href="http://animatika.ru/">
+      Animatika
+  </author>
   <content src="index.html"/>
-  <access origin="*"/>
 	<plugin name="phonegap-plugin-barcodescanner" source="npm" />
 	<!--<plugin name="cordova-plugin-cszbar" source="npm" />-->
   <preference name="webviewbounce" value="false"/>
@@ -42,4 +41,7 @@
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
+  <access origin="*"/>
+	<allow-navigation href="http://*/*" />
+	<allow-navigation href="https://*/*" />
 </widget>

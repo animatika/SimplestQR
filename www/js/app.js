@@ -5,8 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('starter', ['ionic', 'ngCordova'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+.run(function($ionicPlatform) { //alert('run')
+	
+  $ionicPlatform.ready(function() { //scanBarcode();
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -21,36 +22,41 @@ var app = angular.module('starter', ['ionic', 'ngCordova'])
       StatusBar.styleDefault();
     }
   });
+	
+	/*
+	$rootScope.$on('$viewContentLoaded', function(){ alert('viewContentLoaded');
+    //Here your view content is fully loaded !!
+  }); */
 });
 
 app.controller("ExampleController", function($scope, $cordovaBarcodeScanner) {
  
 	$scope.scanBarcode = function() { //alert('scanBarcode');
-	/*
-		cloudSky.zBar.scan(
-		{
-				text_title: 'Скан QR Code', // Android only 
-				text_instructions: 'Please направьте your camera at the QR code.', // Android only 
-				//camera: "front" || "back" // defaults to "back" 
-				//flash: "on" || "off" || "auto" // defaults to "auto". See Quirks 
-				drawSight: true || false //defaults to true, create a red sight/line in the center of the scanner view. 
-		}, function(s) { alert ('success: '+s);
-		
-		}, function(s) { alert ('failed: '+s);
-		
-		}); */
-		
 		
 			$cordovaBarcodeScanner.scan()
 			.then(function(imageData) {
-					alert(imageData.text);
+					//alert(imageData.text);
+					window.open(imageData.text, '_system');
 					console.log("Barcode Format -> " + imageData.format);
 					console.log("Cancelled -> " + imageData.cancelled);
 			}, function(error) {
 					console.log("An error happened -> " + error);
 			});
 			
-			
 	};
- 
+});
+
+
+app.directive( 'elemReady', function( $parse ) {
+   return {
+       restrict: 'A',
+       link: function( $scope, elem, attrs ) {    
+          elem.ready(function(){
+            $scope.$apply(function(){
+                var func = $parse(attrs.elemReady);
+                func($scope);
+            })
+          })
+       }
+    }
 });

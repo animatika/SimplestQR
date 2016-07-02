@@ -29,8 +29,12 @@
       <ion-header-bar class="bar-stable">
         <h1 class="title">QR Simple Reader</h1>
       </ion-header-bar>
-      <ion-content ng-controller="ExampleController">
-				<button class="button button-block button-positive" ng-click="scanBarcode()"  elem-ready="scanBarcode()">Запустить сканер</button> 
+      <ion-content ng-controller="MainController" elem-ready="scanBarcode()">
+				<button class="button button-block button-positive" ng-click="scanBarcode()">Запустить сканер</button> 
+				<div ng-show="lastLink">
+					<h2>Последняя ссылка:</h2>
+					<a href="{{lastLink}}" target="_system">{{lastLink}}</a>
+				</div>
       </ion-content>
     </ion-pane>
   </body>

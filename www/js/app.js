@@ -29,16 +29,17 @@ var app = angular.module('starter', ['ionic', 'ngCordova'])
   }); */
 });
 
-app.controller("ExampleController", function($scope, $cordovaBarcodeScanner) {
+app.controller("MainController", function($scope, $cordovaBarcodeScanner) {
  
 	$scope.scanBarcode = function() { //alert('scanBarcode');
 		
 			$cordovaBarcodeScanner.scan()
 			.then(function(imageData) {
 					//alert(imageData.text);
+					$scope.lastLink = imageData.text;
 					window.open(imageData.text, '_system');
-					console.log("Barcode Format -> " + imageData.format);
-					console.log("Cancelled -> " + imageData.cancelled);
+					//console.log("Barcode Format -> " + imageData.format);
+					//console.log("Cancelled -> " + imageData.cancelled);
 			}, function(error) {
 					console.log("An error happened -> " + error);
 			});

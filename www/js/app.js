@@ -25,29 +25,32 @@ var app = angular.module('starter', ['ionic', 'ngCordova'])
 
 app.controller("ExampleController", function($scope, $cordovaBarcodeScanner) {
  
-    $scope.scanBarcode = function() { //alert('scanBarcode');
-			cloudSky.zBar.scan(
-			{
-					text_title: 'Скан QR Code', // Android only 
-					text_instructions: 'Please направьте your camera at the QR code.', // Android only 
-					//camera: "front" || "back" // defaults to "back" 
-					//flash: "on" || "off" || "auto" // defaults to "auto". See Quirks 
-					drawSight: true || false //defaults to true, create a red sight/line in the center of the scanner view. 
-			}, function(s) { alert ('success: '+s);
-			
-			}, function(s) { alert ('failed: '+s);
-			
+	$scope.scanBarcode = function() { //alert('scanBarcode');
+	/*
+		cloudSky.zBar.scan(
+		{
+				text_title: 'Скан QR Code', // Android only 
+				text_instructions: 'Please направьте your camera at the QR code.', // Android only 
+				//camera: "front" || "back" // defaults to "back" 
+				//flash: "on" || "off" || "auto" // defaults to "auto". See Quirks 
+				drawSight: true || false //defaults to true, create a red sight/line in the center of the scanner view. 
+		}, function(s) { alert ('success: '+s);
+		
+		}, function(s) { alert ('failed: '+s);
+		
+		}); */
+		
+		
+			$cordovaBarcodeScanner.scan()
+			.then(function(imageData) {
+					alert(imageData.text);
+					console.log("Barcode Format -> " + imageData.format);
+					console.log("Cancelled -> " + imageData.cancelled);
+			}, function(error) {
+					console.log("An error happened -> " + error);
 			});
-			/*
-        $cordovaBarcodeScanner.scan().then(function(imageData) {
-            alert(imageData.text);
-            console.log("Barcode Format -> " + imageData.format);
-            console.log("Cancelled -> " + imageData.cancelled);
-        }, function(error) {
-            console.log("An error happened -> " + error);
-        });
-				*/
-				
-    };
+			
+			
+	};
  
 });
